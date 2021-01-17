@@ -10,7 +10,7 @@ We simulate the player moving forward by making the obstacle move backward. Ther
 * Output: The movement list of the bird ('Fly' or 'No action')
 
 ## AI/ML Algorithms
-We are planning to implement a Deep Q Network that uses Q-learning to train our agent. We will learn this algorithm during this quarter. We will keep updating once we learn any better algorithms.
+We are planning to implement a Deep Q Network that uses Q-learning to train our agent. We will learn this algorithm during this quarter and will keep updating once we learn any better algorithms.
 
 ## Evaluation Plan
 * Quantitative:<br>
