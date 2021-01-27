@@ -11,6 +11,3 @@ title:  Team
 
 ## Lizhao Shan
 ***UCI Net ID***: lizhaos
-
-## USER 3
-***UCI Net ID***: ucinetid3
