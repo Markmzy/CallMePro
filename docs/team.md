@@ -11,6 +11,5 @@ title:  Team
 ### Lizhao Shan
 ***UCI Net ID***: lizhaos
 
-
-
-#### Weekly Meeting Time: Friday, Saturday 18 pm (UTC +8)
+### Weekly Meeting Time:
+Friday, Saturday 18 pm (UTC +8)
