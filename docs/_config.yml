@@ -4,6 +4,15 @@
 title:    'CallMePro'
 subtitle: 'CS 175: Project in AI (in Minecraft)'
 
+baseurl: "CallMePro"
+#baseurl: ""
+url: "https://markmzy.github.io/CallMePro/index.html"
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
+
 
 #########################
 # more settings
