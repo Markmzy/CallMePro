@@ -8,12 +8,6 @@ baseurl: "CallMePro"
 #baseurl: ""
 url: "https://markmzy.github.io/CallMePro/index.html"
 
-# Build settings
-theme: minima
-plugins:
-  - jekyll-feed
-
-
 #########################
 # more settings
 
