@@ -3,8 +3,8 @@ layout: default
 title:  Home
 ---
 
-![1](1.png =400x100)
-![2](2.png =400x200)
+![1](1.png){:height="50%" width="50%"}
+![2](2.png){:height="50%" width="50%"}
 ### CallMePro is a project in Minecraft inspired by the game Flappy Bird.
 
 Checkout our [Sourse Code](https://github.com/Markmzy/CallMePro)<br>
