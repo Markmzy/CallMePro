@@ -44,12 +44,14 @@ TBD
 
 
 
-
-
 * Quantitative:<br>
 
-
-
+### After trainning 6000 steps:
+![6000](6000.png){:height="50%" width="50%"}
+### After trainning 14000 steps:
+![14000](14000.png){:height="50%" width="50%"}
+### After trainning 20000 steps:
+![20000](20000.png){:height="50%" width="50%"}
 
 
 <br />
