@@ -41,10 +41,11 @@ TBD
 ### Evaluation
 
 * Qualitative:<br>
-
+For our project, the goal for the agent is approaching the end with the least number of steps to avoid more deductions. Because the less deduction the agent gain, the much rewards he has. During learning, the agent’s initial movement looked a bit silly, since he would get stuck in front of the obstacle and move left and right repeated. And in many cases, he would swam in lava. And even if he passes the obstacle, it is difficult to reach the end within the prescribed number of steps. Might after half hour with learning, the agent may approach the end sometimes, but reward he got was still not good. Therefore, the agent should try to reduce his steps to approach, since the more steps he used, the more rewards he lost because every second before reaching the end, the agent will be punished. After 1 hour with learning, he could appraoch in most times, and gain more and more rewards. 
 
 
 * Quantitative:<br>
+From the following three pictures, we know that the purpose of this program is to allow agents to get more rewards. Through them, we can clearly see that after a lot of learning, agents are getting more and more rewards. In the agent's course of action, the agent can be rewarded by passing gold blocks and get diamonds, and every step the agent takes and falling into the lava will also cause corresponding punishment to the agent. The most important thing is that passing the finish line will give the agent the highest reward, so the agent is motivated to pass each gold blocks, get more diamonds, and use the fewest steps to reach the finish line. Through the three return pictures, we can see that the speed of the agent's advance is increasing, and the more rewards he gets. However, in some periods of time, the income of the agents is decreasing, which may be that the agents are trying to find other ways to increase their income.
 
 ### After trainning 6000 steps:
 ![6000](6000.png){:height="50%" width="50%"}
