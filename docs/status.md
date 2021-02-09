@@ -61,7 +61,9 @@ Until this status report, we have not implement more maps with different difficu
 The ultimate goal of this project is to approach the score of human control as much as possible, or even exceed the score of human control. Therefore, we should have completed the optimization of all algorithms, and passed enough time and steps to train the agent, in order to make him reach the best condition. After that, we may invite some friends to play it and get the mean score. Then see whether the agent can approach it or exceed it.
 
 ### Challenges
-
+The challenge we are facing right now is when the agent collected some diamonds and he dead when he swam in lava, these diamonds he collected would left in where he dead, and when the map reset, these diamonds were still in here. We need to fix this error to make these diamonds disappear when map reset. Because reseting map should clear all the items in the previous map, and then generate a brand new map without leaving anything from the previous map.
+The another problem we need to fix is the agents will not take the initiative to pick up diamonds on the gold block yet. Because each diamond worth 10 points, if the agent wants to gain more and more rewards, he should pick up more diamonds after learning. But right now, even after a long time to learn, the agent still can not pick up any diamonds initiatively to improve his reward. This problem might be more diffucult, so we should change alforithm to let the agent pick up diamond initative.
+The most diffucult part is wrtitting a new machine learning method. The current machine learning method is still PPO which from the assignment2. We are learning Deep Q-learning and will use it in our project. With our understanding, Deep Q-learning might be a better algorithm for our project, but is hard to achieve it, since we do not know whether we can use it by importing a library. If we can use it by importing a library, we aloso do not knwo which library we can import from. And furthermore, if this machine learning algorithm is not good for our agent to learn to finish his mission better, we may still need to find a better one.
 
 
 ### Resources Used
