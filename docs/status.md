@@ -55,8 +55,8 @@ TBD
 <br />
 
 ### Remaining Goals
-
-
+Until this status report, we have not implement more maps with different difficulty. For example, the length of the path is a constant 100 now, and we may increase it in the future. Furthermore, the only obstacle is the brisk block now, so we may add some other obstacles to increase the difficulty of completion. We may also add some penalties policy to improve the performance of the agent. We may also put some interesting element. For example, traps on the ground or arrows from both sides of the path. On the other hand, we also hope to implement some more useful algorithms to make the agent's actions more smooth and realistic.
+The ultimate goal of this project is to approach the score of human control as much as possible, or even exceed the score of human control. Therefore, we should have completed the optimization of all algorithms, and passed enough time and steps to train the agent, in order to make him reach the best condition. After that, we may invite some friends to play it and get the mean score. Then see whether the agent can approach it or exceed it.
 
 ### Challenges
 
