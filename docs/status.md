@@ -5,7 +5,7 @@ title: Status
 
 ### Sample Video
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=gO7Sl99GDOo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe height=498 width=510 src="https://www.youtube.com/watch?v=gO7Sl99GDOo">
 <br />
 
 ### Summary
