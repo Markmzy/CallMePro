@@ -23,21 +23,21 @@ At the very beginning, our initial idea was to make a mini-game similar to flapp
 ### Approach
 
 For this project, we are using PPO to train our agent to let him learn better. PPO is a new method of Policy Gradient, and got a big improvement. The main idea of the algorithm is to accept the state s, output the action probability distribution, sample the action in the action probability distribution, execute the action, get a reward, and jump to the next state.  
-(action probability distribution: 0: 'move 0',  # Stop
-                                  1: 'strafe 1',  # Move one block left
+(action probability distribution: 0: 'move 0',  # Stop  
+                                  1: 'strafe 1',  # Move one block left  
                                   2: 'strafe -1',  # Move one block right)  
 After we get 0, 1 or 2 from action, then we will make action_dict to be a parameter of sendCommand to erform actions.  
 Under such a step, we can collect a batch of samples, and then use the gradient descent algorithm to learn these samples. A core improvement of PPO is to convert the On-policy training process in Policy Gradient into Off-policy. There are two probability density functions are written as $p(x)$ and $q(x), and $p(x)/q(x)$ is called the ratio of the probability of taking the current action to the current state of the new and old strategy. On the other word, the action is discrete, the output is a set of discrete probability distributions, the action is selected based on this probability distribution. $p(x)/q(x) is this action corresponds to a probability value in the current state in the new and old strategies.  
 And then we can fully sample the old policy, and then improve the new policy. This process can be repeated N times in a round instead of Is 1 time. The gradient of the average reward value for N rounds:  
 图1:  
-In the actual training process, there will be an operation on the clip:
+In the actual training process, there will be an operation on the clip:  
 图2:  
-Reward functions: 
-R = 10            // Agent gain a diamond
-R = 10            // Agent pass gold blocks
-R = 100           // Agent reach the destination
-R = -1            // Each second agent lost
-R = -10           // Agent swim in lava
+Reward functions:  
+R = 10            // Agent gain a diamond  
+R = 10            // Agent pass gold blocks  
+R = 100           // Agent reach the destination  
+R = -1            // Each second agent lost  
+R = -10           // Agent swim in lava  
 
 **Actions of agent**
 
