@@ -34,6 +34,8 @@ In the actual training process, there will be an operation on the clip:
 图2:  
 
 
+![approach](approach.png){:height="70%" width="70%"}
+
 **Actions of agent**
 
 ```math
@@ -54,24 +56,25 @@ In the actual training process, there will be an operation on the clip:
 ### Evaluation
 
 * Qualitative:<br>
-For our project, the goal for the agent is approaching the end with the least number of steps to avoid more deductions. Because the less deduction the agent gain, the much rewards he has. During learning, the agent’s initial movement looked a bit silly, since he would get stuck in front of the obstacle and move left and right repeated. And in many cases, he would swam in lava. And even if he passes the obstacle, it is difficult to reach the end within the prescribed number of steps. Might after half hour with learning, the agent may approach the end sometimes, but reward he got was still not good. Therefore, the agent should try to reduce his steps to approach, since the more steps he used, the more rewards he lost because every second before reaching the end, the agent will be punished. After 1 hour with learning, he could appraoch in most times, and gain more and more rewards. 
+For our project, the goal for the agent is to approach the destination with the least number of steps to avoid more deductions. Because the less deduction the agent gains, the higher rewards he gets. Before reinforcement learning, the agent’s movement looked a bit dumb, since he would get stuck in front of the obstacle and move left and right repeatedly. And in many cases, he would swim in lava. And even if he passes the obstacle, it is difficult for it to reach the destination within the maximum number of steps per episode. However, after learning for a half-hour, the agent approaches the destination successfully sometimes, but the rewards it got still not good as expected. Therefore, the agent should try to reduce the steps it uses to approach the destination, since the more steps he used, the more rewards he lost because every second before reaching the destination, the agent will be punished. After learning for 2 hours, the agent could reach the destination line every time, and gain more and more rewards. The agent becomes smart enough to pass all gaps, and be able to identify which side the gap is when encountering a wall.<br>
 
 
 * Quantitative:<br>
-From the following three pictures, we know that the purpose of this program is to allow agents to get more rewards. Through them, we can clearly see that after a lot of learning, agents are getting more and more rewards. In the agent's course of action, the agent can be rewarded by passing gold blocks and get diamonds, and every step the agent takes and falling into the lava will also cause corresponding punishment to the agent. The most important thing is that passing the finish line will give the agent the highest reward, so the agent is motivated to pass each gold blocks, get more diamonds, and use the fewest steps to reach the finish line. Through the three return pictures, we can see that the speed of the agent's advance is increasing, and the more rewards he gets. However, in some periods of time, the income of the agents is decreasing, which may be that the agents are trying to find other ways to increase their income.
+From the following three pictures, we know that the purpose of this program is to allow agents to get more rewards. In this three return graphs, we can clearly see that after a lot of training, the agent are getting more and more rewards. In the agent's course of action, the agent can be rewarded by passing gold blocks and get diamonds, and every step the agent takes and falling into the lava will also cause corresponding punishment to the agent. The most important thing is that passing the destination line will give the agent a lot rewards, so the agent is motivated to pass each gold blocks, get more diamonds, and use the fewest steps to reach the finish line. Through the three return graphs, we can see that the speed of the agent's advance is increasing, The agent is guarentee to pass this map every time. However, after 14000 steps, the progress of the agent is not so obvious. This might because the map is too simple for the agent now.<br>
 
-### After trainning 6000 steps:
+### After training 6000 steps:
 ![6000](6000.png){:height="50%" width="50%"}
-### After trainning 14000 steps:
+### After training 14000 steps:
 ![14000](14000.png){:height="50%" width="50%"}
-### After trainning 20000 steps:
+### After training 20000 steps:
 ![20000](20000.png){:height="50%" width="50%"}
 
 
 <br />
 
 ### Remaining Goals
-Until this status report, we have not implement more maps with different difficulty. For example, the length of the path is a constant 100 now, and we may increase it in the future. Furthermore, the only obstacle is the brisk block now, so we may add some other obstacles to increase the difficulty of completion. We may also add some penalties policy to improve the performance of the agent. We may also put some interesting element. For example, traps on the ground or arrows from both sides of the path. On the other hand, we also hope to implement some more useful algorithms to make the agent's actions more smooth and realistic.  
+Until this status report, we have not implement more maps with different difficulty. For example, the length of the path is a constant 100 now, and we may increase it in the future version. Furthermore, the only obstacle is the brisk block now, so we may add some other obstacles to increase the difficulty of the game. We may also add some penalties policy to improve the effectiveness of the reinforcement learning. We may also put more interesting element. For example, traps on the ground or arrows from both sides of the path. On the other hand, we also hope to implement some more useful algorithms to make the agent's actions more smooth and realistic.<br>
+
 The ultimate goal of this project is to approach the score of human control as much as possible, or even exceed the score of human control. Therefore, we should have completed the optimization of all algorithms, and passed enough time and steps to train the agent, in order to make him reach the best condition. After that, we may invite some friends to play it and get the mean score. Then see whether the agent can approach it or exceed it.
 
 ### Challenges
