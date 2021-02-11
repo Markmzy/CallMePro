@@ -33,6 +33,7 @@ And then we can fully sample the old policy, and then improve the new policy. Th
 In the actual training process, there will be an operation on the clip:  
 图2:  
 
+<br />
 
 ![approach](approach.png){:height="70%" width="70%"}
 
