@@ -5,7 +5,7 @@ title: Status
 
 ### Sample Video
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/gO7Sl99GDOo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="720" height="480" src="https://www.youtube.com/embed/gO7Sl99GDOo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <br />
 
 [Video](https://www.youtube.com/watch?v=gO7Sl99GDOo)
@@ -32,12 +32,7 @@ And then we can fully sample the old policy, and then improve the new policy. Th
 图1:  
 In the actual training process, there will be an operation on the clip:  
 图2:  
-Reward functions:  
-R = 10            // Agent gain a diamond  
-R = 10            // Agent pass gold blocks  
-R = 100           // Agent reach the destination  
-R = -1            // Each second agent lost  
-R = -10           // Agent swim in lava  
+
 
 **Actions of agent**
 
@@ -80,14 +75,16 @@ Until this status report, we have not implement more maps with different difficu
 The ultimate goal of this project is to approach the score of human control as much as possible, or even exceed the score of human control. Therefore, we should have completed the optimization of all algorithms, and passed enough time and steps to train the agent, in order to make him reach the best condition. After that, we may invite some friends to play it and get the mean score. Then see whether the agent can approach it or exceed it.
 
 ### Challenges
-The challenge we are facing right now is when the agent collected some diamonds and he dead when he swam in lava, these diamonds he collected would left in where he dead, and when the map reset, these diamonds were still in here. We need to fix this error to make these diamonds disappear when map reset. Because reseting map should clear all the items in the previous map, and then generate a brand new map without leaving anything from the previous map.  
-The another problem we need to fix is the agents will not take the initiative to pick up diamonds on the gold block yet. Because each diamond worth 10 points, if the agent wants to gain more and more rewards, he should pick up more diamonds after learning. But right now, even after a long time to learn, the agent still can not pick up any diamonds initiatively to improve his reward. This problem might be more diffucult, so we should change alforithm to let the agent pick up diamond initative.  
-The most diffucult part is wrtitting a new machine learning method. The current machine learning method is still PPO which from the assignment2. We are learning Deep Q-learning and will use it in our project. With our understanding, Deep Q-learning might be a better algorithm for our project, but is hard to achieve it, since we do not know whether we can use it by importing a library. If we can use it by importing a library, we aloso do not knwo which library we can import from. And furthermore, if this machine learning algorithm is not good for our agent to learn to finish his mission better, we may still need to find a better one.
+The challenge we are facing right now is when the agent have collected some diamonds but then he dead from swamming in lava, these diamonds would left in where he dead. However, after reset the map, these diamonds were still in there. We need to fix this error to make these diamonds disappear when map reset. Because reseting map should clear all the items from the previous episode, and then generate a brand new episode.<br>  
+
+Another problem we need to fix is the agent will not take the initiative to pick up diamonds on the gold block yet. Because each diamond worth 10 points, if the agent wants to gain as much as rewards, it should pick up more diamonds after learning. But right now, even after training for 3 hours, the agent still could not pick up diamonds initiatively to improve his reward points. This problem might be more difficult. So we might need to optimize our algorithm in the future.<br>  
+
+The most difficult part is wrtitting our own reinforcement learning algorithm. The current algorithm is still using PPO library from the assignment 2. We are learning Deep Q-learning and trying to use it in our project. Based on our knowledge, Deep Q-learning might be a better algorithm for our project. But it is hard for us to implement it in few weeks, since we do not famililar with any reinforcement learning library.<br>
 
 
 ### Resources Used
 
-#### The following resourse is useful when we doing our project.
+#### The following resourses is useful when we doing our project.
 
 1. [XML Schema Documentation](https://microsoft.github.io/malmo/0.21.0/Schemas/MissionHandlers.html)
 2. [Pytorch Reinforcement Learning](https://github.com/bentrevett/pytorch-rl)
