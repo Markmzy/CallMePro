@@ -22,19 +22,20 @@ At the very beginning, our initial idea was to make a mini-game similar to Flapp
 
 ### Approach
 
-In this project, we are using PPO to train our agent to make him perform better. PPO is a new method of Policy Gradient, and it has a big improvement. The main idea of the algorithm is to accept the state s, output the action probability distribution, sample the action in the action probability distribution, execute the action, get a reward, and jump to the next state.After we get the index of action, then we will make action_dict to be a parameter of sendCommand to perform action.<br>
+In this project, we are using PPO to train our agent that make him perform better. The PPO algorithm is a new type of Policy Gradient algorithm. The Policy Gradient algorithm is very sensitive to the step size, but it is difficult to choose a suitable step size. If the difference between the old and the new strategy changes during the training process is too large, it is not conducive to learning. PPO proposes a new objective function that can be updated in multiple training steps in small batches, which solves the problem of difficult to determine the step length in the Policy Gradient algorithm. The main idea of the algorithm is to accept the state s, output the action probability distribution, sample the action in the action probability distribution, execute the action, get a reward, and jump to the next state. After we get the index of action, then we will make action_dict to be a parameter of sendCommand.<br>
 
-We can collect a batch of samples after repeat these steps, and then use the gradient descent algorithm to learn these samples. A big improvement of PPO is to convert the On-policy training process in Policy Gradient into Off-policy. There are two probability density functions are written as $p(x)$ and $q(x)$. $p(x)/q(x)$ is called the ratio of the probability of taking the current action to the current state of the new and old strategy. On the other words, the action is discrete, the output is a set of discrete probability distributions, the action is selected based on this probability distribution. $p(x)/q(x) is this action corresponds to a probability value in the current state in the new and old strategies. <br>
+We can collect a batch of samples after repeat these steps, and then use the gradient descent algorithm to learn these samples. A big improvement of PPO is to convert the On-policy training process in Policy Gradient into Off-policy. There are two probability density functions are written as p(x) and q(x). And p(x)/q(x) is called the ratio of the probability of taking the current action to the current state of the new and old strategy. In other words, the action is discrete, the output is a set of discrete probability distributions, the action is selected based on this probability distribution. We can fully sample the old policy, and then improve the new policy. This process can be repeated N times in a round instead of 1 time.<br>
 
-And then we can fully sample the old policy, and then improve the new policy. This process can be repeated N times in a round instead of 1 time. The gradient of the average reward value for N rounds:  
+**The gradient of the average reward value for N rounds:**<br>  
 ![图1](图1.png){:height="70%" width="70%"}
 
-In the actual training process, there will be an operation on the clip:
+**In the actual training process, there will be an operation on the clip:**<br>
 ![图2](图2.png){:height="70%" width="70%"}
 
 <br />
 
 **Approach**
+<br />
 ![approach](approach.png){:height="50%" width="50%"}
 
 **Actions of agent**
