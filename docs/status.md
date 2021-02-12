@@ -35,7 +35,7 @@ In the actual training process, there will be an operation on the clip:
 <br />
 
 **Approach**
-![approach](approach.png){:height="70%" width="70%"}
+![approach](approach.png){:height="50%" width="50%"}
 
 **Actions of agent**
 
