@@ -84,7 +84,7 @@ The challenge we are facing right now is when the agent has collected some diamo
 
 Another problem we need to fix is the agent will not take the initiative to pick up diamonds on the gold block yet. Because each diamond worth 10 points, if the agent wants to gain as much as rewards, it should pick up more diamonds after learning. But right now, even after training for 3 hours, the agent still could not pick up diamonds initiatively to improve his reward points. This problem might be more difficult. So we might need to optimize our algorithm in the future.<br>  
 
-The most difficult part is writing our own reinforcement learning algorithm. The current algorithm is still using the PPO library from assignment 2. We are learning Deep Q-learning and trying to use it in our project. Based on our knowledge, Deep Q-learning might be a better algorithm for our project. But it is hard for us to implement it in few weeks since we do not familiar with any reinforcement learning library.<br>
+The most challenging part for us is the time zoom and the number of team members. We are back to China, we often need to get up in the early hours of the night to attend class, which often affects our sleep, so that it affects our thinking ability and reaction speed. This also leads to another problem, that is, we must find a third teammate who is in the same jet lag with us, because this will facilitate our communication, otherwise it will often happen that we can not find each other. Therefore, completing the homework by two people greatly increases the workload and difficulty. We also hope that in the future work, we can allocate our time arrangements well to improve our efficiency.<br>
 
 
 ### Resources Used
