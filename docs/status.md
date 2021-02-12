@@ -57,11 +57,11 @@ We can collect a batch of samples after repeat these steps, and then use the gra
 
 ### Evaluation
 
-* Qualitative:<br>
+**Qualitative:**<br>
 For our project, the goal for the agent is to approach the destination with the least number of steps to avoid more deductions. Because the less deduction the agent gains, the higher rewards he gets. Before reinforcement learning, the agent’s movement looked a bit dumb, since he would get stuck in front of the obstacle and move left and right repeatedly. And in many cases, he would swim in lava. And even if he passes the obstacle, it is difficult for it to reach the destination within the maximum number of steps per episode. However, after learning for a half-hour, the agent approaches the destination successfully sometimes, but the rewards it got still not good as expected. Therefore, the agent should try to reduce the steps it uses to approach the destination, since the more steps he used, the more rewards he lost because every second before reaching the destination, the agent will be punished. After learning for 2 hours, the agent could reach the destination line every time, and gain more and more rewards. The agent becomes smart enough to pass all gaps, and be able to identify which side the gap is when encountering a wall.<br>
 
 
-* Quantitative:<br>
+**Quantitative:**<br>
 From the following three pictures, we know that the purpose of this program is to allow agents to get more rewards. In these three return graphs, we can clearly see that after a lot of training, the agent is getting more and more rewards. In the agent's course of action, the agent can be rewarded by passing gold blocks and get diamonds, and every step the agent takes and falling into the lava will also cause corresponding punishment to the agent. The most important thing is that passing the destination line will give the agent a lot of rewards, so the agent is motivated to pass each gold block, get more diamonds, and use the fewest steps to reach the finish line. Through the three return graphs, we can see that the speed of the agent's advance is increasing, The agent is guarantee to pass this map every time. However, after 14000 steps, the progress of the agent is not so obvious. This might because the map is too simple for the agent now.<br>
 
 ### After training 6000 steps:
