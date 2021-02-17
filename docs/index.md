@@ -22,3 +22,7 @@ title:  Home
 - [Final](final.html)
 
 
+### Weekly Meeting Time:
+Friday, Saturday 18 pm (UTC +8)
+
+
