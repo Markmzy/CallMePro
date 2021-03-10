@@ -22,13 +22,15 @@ class CallMePro(gym.Env):
 
     def __init__(self, env_config):
         # Static Parameters
+        self.penalty_density = .02
         self.obs_size = 5
         self.log_frequency = 10
+        self.max_episode_steps = 400
         self.action_dict = {
-            0: 'move 1',  # Move one block forward
-            1: 'turn 1',  # Turn 90 degrees to the right
-            2: 'turn -1',  # Turn 90 degrees to the left
-            3: 'attack 1'  # Destroy block
+            0: 'move 0',  # Stop
+            1: 'strafe 1',  # Move one block left
+            2: 'strafe -1',  # Move one block right
+            3: 'attack 1',
         }
 
         # Rllib Parameters
@@ -43,6 +45,19 @@ class CallMePro(gym.Env):
             print('ERROR:', e)
             print(self.agent_host.getUsage())
             exit(1)
+
+        # CallMePro Parameters
+        self.obs = None
+        self.face_brick_move = False
+        self.face_gold_move = False
+        self.face_diamond_move = False
+        self.face_stone_move = False
+        self.face_diamondblock_move = False
+        self.face_coal_move = False
+        self.episode_step = 0
+        self.episode_return = 0
+        self.returns = []
+        self.steps = []
 
     def reset(self):
         """
@@ -67,7 +82,8 @@ class CallMePro(gym.Env):
             self.log_returns()
 
         # Get Observation
-        self.obs, self.allow_break_action = self.get_observation(world_state)
+        #self.obs = self.get_observation(world_state)
+        self.obs, self.face_brick_move, self.face_gold_move, self.face_diamond_move, self.face_stone_move, self.face_diamondblock_move, self.face_coal_move = self.get_observation(world_state)
 
         return self.obs
 
@@ -86,17 +102,81 @@ class CallMePro(gym.Env):
         """
 
         # Get Action
-        # command = self.action_dict[action]
-        # if command != 'attack 1' or self.allow_break_action:
-        #     self.agent_host.sendCommand(command)
-        #     time.sleep(.2)
-        #     self.episode_step += 1
+        if(self.face_stone_move == True):
+            self.agent_host.sendCommand('move 1')
+            time.sleep(.2)
+
+        if(self.face_diamondblock_move == True):
+            self.agent_host.sendCommand('move 1')
+            time.sleep(.2)
+            self.agent_host.sendCommand('move 1')
+            time.sleep(.2)
+
+        # if(self.face_stone_move == False and self.face_diamondblock_move == False and self.face_brick_move == False and self.face_gold_move == False and self.face_diamond_move == False and self.face_coal_move == False):
+        #     print("im here")
+        #     if(action != 0):
+        #         if(action != 3):
+        #             command = 'move 1'
+        #             self.agent_host.sendCommand(command)
+        #             command = self.action_dict[action]
+        #             self.agent_host.sendCommand(command)
+        #             time.sleep(.2)
+        #             self.episode_step += 1
+        
+        #self.obs, self.allow_break_action = self.get_observation(world_state)
+        #print("true or false: ", self.select_move_action)
+
+        if(self.face_brick_move == True):
+            if(action != 0):
+                if(action != 3):
+                    command = 'move 1'
+                    self.agent_host.sendCommand(command)
+                    command = self.action_dict[action]
+                    self.agent_host.sendCommand(command)
+                    time.sleep(.2)
+                    self.episode_step += 1
+            
+        if(self.face_gold_move == True):
+            if(action != 3):
+                command = 'move 1'
+                self.agent_host.sendCommand(command)
+                command = self.action_dict[action]
+                self.agent_host.sendCommand(command)
+                time.sleep(.2)
+                self.episode_step += 1
+
+        if(self.face_diamond_move == True):
+            if(action != 0):
+                if(action == 3):
+                    command = self.action_dict[action]
+                    self.agent_host.sendCommand(command)
+                    time.sleep(0.8)
+                    self.agent_host.sendCommand('move 1')
+                else:
+                    command = self.action_dict[action]
+                    self.agent_host.sendCommand(command)
+                time.sleep(.2)
+                self.episode_step += 1
+
+        if(self.face_coal_move == True):
+            if(action != 0):
+                if(action == 3):
+                    command = self.action_dict[action]
+                    self.agent_host.sendCommand(command)
+                    time.sleep(0.8)
+                    self.agent_host.sendCommand('move 1')
+                else:
+                    command = self.action_dict[action]
+                    self.agent_host.sendCommand(command)
+                time.sleep(.2)
+                self.episode_step += 1
 
         # Get Observation
-        # world_state = self.agent_host.getWorldState()
-        # for error in world_state.errors:
-        #     print("Error:", error.text)
-        # self.obs, self.allow_break_action = self.get_observation(world_state)
+        world_state = self.agent_host.getWorldState()
+        for error in world_state.errors:
+            print("Error:", error.text)
+        #self.obs = self.get_observation(world_state)
+        self.obs, self.face_brick_move, self.face_gold_move, self.face_diamond_move, self.face_stone_move, self.face_diamondblock_move, self.face_coal_move = self.get_observation(world_state)
 
         # Get Done
         done = not world_state.is_mission_running
@@ -110,16 +190,27 @@ class CallMePro(gym.Env):
         return self.obs, reward, done, dict()
 
     def get_mission_xml(self):
+        # def setLava():
+        #     my_xml = ""
+        #     for j in range(0, 25):
+        #         for i in range(-5, 6):
+        #             lavaNumber = random.choice(range(0, 100))
+        #             if(lavaNumber < 5):
+        #                 #my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'1\' ' + 'z=\'' + str(z*4+1) + '\' type=\'lava\'/>\n'
+        #                 my_xml += "<DrawBlock x='{}' y='1' z='{}' type='lava' />".format(i, randint(4*j+1, 4*j+3))
+        #     return my_xml
+
         def initmap():
             my_xml = ""
-            for z in range(0, 101):
+            for z in range(0, 201):
                 for y in range(2, 11):
                     my_xml += '<DrawBlock y=\'' + str(y) + '\' x=\'-10\' ' + 'z=\'' + str(z) + '\' type=\'lava\'/>\n'
                     my_xml += '<DrawBlock y=\'' + str(y) + '\' x=\'10\' ' + 'z=\'' + str(z) + '\' type=\'lava\'/>\n'
 
             for x in range(-5,6):
-                my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'1\' ' + 'z=\'-1\' type=\'redstone_block\'/>\n'
-                my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'1\' ' + 'z=\'100\' type=\'diamond_block\'/>\n'
+                my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'1\' ' + 'z=\'201\' type=\'diamond_block\'/>\n'
+                for z in range(0, 51):
+                    my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'1\' ' + 'z=\'' + str(4 * z) + '\' type=\'gold_block\'/>\n'
             return my_xml
 
         def obstacle():
@@ -127,17 +218,42 @@ class CallMePro(gym.Env):
             for x in range(-5,6):
                 if(x < -1 or x > 1):
                     for y in range(2, 3):
-                        my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'' + str(y) + '\' ' + 'z=\'0\' type=\'gold_block\'/>\n'
+                        my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'' + str(y) + '\' ' + 'z=\'0\' type=\'brick_block\'/>\n'
 
-            for z in range(1, 26):
-                randomN = random.choice(range(1, 7))
-                for x in range(-5, -5+randomN):
-                    for y in range(2, 3):
-                        my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'' + str(y) + '\' ' + 'z=\'' + str(4 * z) + '\' type=\'gold_block\'/>\n'
+            for z in range(1, 51):
+                nblocks = random.choice(range(1, 7))
+                probdiamond = random.choice(range(1, 201))
 
-                for x in range(max(-2+randomN,0), 6):
+                for x in range(-5, -5+nblocks):
                     for y in range(2, 3):
-                        my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'' + str(y) + '\' ' + 'z=\'' + str(4 * z) + '\' type=\'gold_block\'/>\n'
+                        my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'' + str(y) + '\' ' + 'z=\'' + str(4 * z) + '\' type=\'brick_block\'/>\n'
+
+                for x in range(max(-2+nblocks, 0), 6):
+                    for y in range(2, 3):
+                        my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'' + str(y) + '\' ' + 'z=\'' + str(4 * z) + '\' type=\'brick_block\'/>\n'
+
+                if(z != 50):
+                    coal_number = random.choice(range(0, 3))
+                    for h in range(0, coal_number):
+                        my_xml += "<DrawBlock x='{}' y='2' z='{}' type='coal_ore' />".format(randint(-5+nblocks, max(-2+nblocks, 0)), randint(4*z+1, 4*z+3))
+
+                    diamond_number = random.choice(range(0, 3))
+                    for h in range(0, diamond_number):
+                        my_xml += "<DrawBlock x='{}' y='2' z='{}' type='diamond_ore' />".format(randint(-5+nblocks, max(-2+nblocks, 0)), randint(4*z+1, 4*z+3))
+
+                # if probdiamond > 75:
+                #     diamondpos = random.choice(range(-5+nblocks, -2+nblocks))
+                #     my_xml += '<DrawItem x=\'' + str(diamondpos) + '\' y=\'2\' ' + 'z=\'' + str(4 * z) + '\' type=\'diamond\'/>\n'
+
+            # for i in range(60):
+            #     j = random.choice(range(1, 101))
+            #     if(j % 4 != 0):
+            #         my_xml += "<DrawBlock x='{}' y='2' z='{}' type='diamond_ore' />".format(randint(-5, 6), j)
+
+            # for i in range(30):
+            #     j = random.choice(range(1, 101))
+            #     if(j % 4 != 0):
+            #         my_xml += "<DrawBlock x='{}' y='2' z='{}' type='coal_ore' />".format(randint(-5, 6), j)
 
             return my_xml
 
@@ -160,31 +276,34 @@ class CallMePro(gym.Env):
                             <FlatWorldGenerator generatorString="3;7,2;1;"/>
                             <DrawingDecorator>
                                 ''' + \
-                                "<DrawCuboid x1='{}' x2='{}' y1='2' y2='2' z1='{}' z2='{}' type='air'/>".format(-6, 6, 0, 100) + \
-                                "<DrawCuboid x1='{}' x2='{}' y1='1' y2='1' z1='{}' z2='{}' type='stone'/>".format(-6, 6, 0, 100) + \
+                                "<DrawCuboid x1='{}' x2='{}' y1='2' y2='2' z1='{}' z2='{}' type='air'/>".format(-6, 6, 0, 201) + \
+                                "<DrawCuboid x1='{}' x2='{}' y1='1' y2='1' z1='{}' z2='{}' type='stone'/>".format(-6, 6, 0, 201) + \
                                 initmap() + \
                                 obstacle() + \
-                                '''<DrawBlock x='0'  y='2' z='0' type='air' />
-                                <DrawBlock x='0'  y='1' z='0' type='stone' />
+                                '''
                             </DrawingDecorator>
                             <ServerQuitWhenAnyAgentFinishes/>
                         </ServerHandlers>
                     </ServerSection>
 
                     <AgentSection mode="Survival">
-                        <Name>Bob</Name>
+                        <Name>CallMePro</Name>
                         <AgentStart>
-                            <Placement x="0.5" y="2" z="-1" pitch="30" yaw="0"/>
+                            <Placement x="0.5" y="2" z="-0.5" pitch="45" yaw="0"/>
                             <Inventory>
+                                <InventoryItem slot="0" type="diamond_pickaxe"/>
                             </Inventory>
                         </AgentStart>
                         <AgentHandlers>
                             <RewardForCollectingItem>
-                            <Item reward = "5" type = "diamond" />
+                            <Item reward = "10" type = "diamond" />
+                            <Item reward = "-10" type = "coal" />
                             </RewardForCollectingItem>
                             <RewardForTouchingBlockType>
-                            <Block reward = "-5" type = "lava" />
-                            <Block reward = "50" type = "diamond_block" />
+                            <Block reward = "10" type = "gold_block" />
+                            <Block reward = "-10" type = "lava" />
+                            <Block reward = "100" type = "diamond_block" />
+                            <Block reward = "-1" type = "stone" />
                             </RewardForTouchingBlockType>
                             <DiscreteMovementCommands/>
                             <ObservationFromFullStats/>
@@ -197,8 +316,8 @@ class CallMePro(gym.Env):
                             </ObservationFromGrid>
                             <AgentQuitFromTouchingBlockType>
                                 <Block type="diamond_block" />
-                                <Block type="gold_block" />
                             </AgentQuitFromTouchingBlockType>
+                            <AgentQuitFromReachingCommandQuota total="'''+str(self.max_episode_steps)+'''" />
                         </AgentHandlers>
                     </AgentSection>
                 </Mission>'''
@@ -236,53 +355,66 @@ class CallMePro(gym.Env):
 
         return world_state
 
-    # def get_observation(self, world_state):
-    #     """
-    #     Use the agent observation API to get a flattened 2 x 5 x 5 grid around the agent.
-    #     The agent is in the center square facing up.
+    def get_observation(self, world_state):
+        """
+        Use the agent observation API to get a flattened 2 x 5 x 5 grid around the agent.
+        The agent is in the center square facing up.
 
-    #     Args
-    #         world_state: <object> current agent world state
+        Args
+            world_state: <object> current agent world state
 
-    #     Returns
-    #         observation: <np.array> the state observation
-    #         allow_break_action: <bool> whether the agent is facing a diamond
-    #     """
-        # obs = np.zeros((2 * self.obs_size * self.obs_size, ))
-        # allow_break_action = False
+        Returns
+            observation: <np.array> the state observation
+            allow_break_action: <bool> whether the agent is facing a diamond
+        """
+        obs = np.zeros((2 * self.obs_size * self.obs_size, ))
+        face_brick_move = False
+        face_gold_move = False
+        face_diamond_move = False
+        face_stone_move = False
+        face_diamondblock_move = False
+        face_coal_move = False
 
-        # while world_state.is_mission_running:
-        #     time.sleep(0.1)
-        #     world_state = self.agent_host.getWorldState()
-        #     if len(world_state.errors) > 0:
-        #         raise AssertionError('Could not load grid.')
+        while world_state.is_mission_running:
+            time.sleep(0.1)
+            world_state = self.agent_host.getWorldState()
+            if len(world_state.errors) > 0:
+                raise AssertionError('Could not load grid.')
 
-        #     if world_state.number_of_observations_since_last_state > 0:
-        #         # First we get the json from the observation API
-        #         msg = world_state.observations[-1].text
-        #         observations = json.loads(msg)
+            if world_state.number_of_observations_since_last_state > 0:
+                # First we get the json from the observation API
+                msg = world_state.observations[-1].text
+                observations = json.loads(msg)
 
-        #         # Get observation
-        #         grid = observations['floorAll']
-        #         for i, x in enumerate(grid):
-        #             obs[i] = x == 'diamond_ore' or x == 'lava'
+                # Get observation
+                grid = observations['floorAll']
+                for i, x in enumerate(grid):
+                    if x == 'brick_block' or x == 'lava':
+                        obs[i] = 1
+                    else:
+                        obs[i] = 0
 
-        #         # Rotate observation with orientation of agent
-        #         obs = obs.reshape((2, self.obs_size, self.obs_size))
-        #         yaw = observations['Yaw']
-        #         if yaw >= 225 and yaw < 315:
-        #             obs = np.rot90(obs, k=1, axes=(1, 2))
-        #         elif yaw >= 315 or yaw < 45:
-        #             obs = np.rot90(obs, k=2, axes=(1, 2))
-        #         elif yaw >= 45 and yaw < 135:
-        #             obs = np.rot90(obs, k=3, axes=(1, 2))
-        #         obs = obs.flatten()
+                # Rotate observation with orientation of agent
+                obs = obs.reshape((2, self.obs_size, self.obs_size))
+                yaw = observations['Yaw']
+                if yaw >= 225 and yaw < 315:
+                    obs = np.rot90(obs, k=1, axes=(1, 2))
+                elif yaw >= 315 or yaw < 45:
+                    obs = np.rot90(obs, k=2, axes=(1, 2))
+                elif yaw >= 45 and yaw < 135:
+                    obs = np.rot90(obs, k=3, axes=(1, 2))
+                obs = obs.flatten()
+                
+                face_brick_move = observations['LineOfSight']['type'] == 'brick_block'
+                face_gold_move = observations['LineOfSight']['type'] == 'gold_block'
+                face_diamond_move = observations['LineOfSight']['type'] == 'diamond_ore'
+                face_stone_move = observations['LineOfSight']['type'] == 'stone'
+                face_diamondblock_move = observations['LineOfSight']['type'] == 'diamond_block'
+                face_coal_move = observations['LineOfSight']['type'] == 'coal_ore'
 
-        #         allow_break_action = observations['LineOfSight']['type'] == 'diamond_ore'
+                break
 
-        #         break
-
-        # return obs, allow_break_action
+        return obs, face_brick_move, face_gold_move, face_diamond_move, face_stone_move, face_diamondblock_move, face_coal_move
 
     def log_returns(self):
         """
