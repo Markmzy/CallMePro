@@ -25,19 +25,12 @@ class CallMePro(gym.Env):
         self.penalty_density = .02
         self.obs_size = 5
         self.log_frequency = 10
-<<<<<<< HEAD
         self.max_episode_steps = 400
-=======
-        self.max_episode_steps = 200
->>>>>>> d6624e565e9a53a840f5951e2e48a0c34cdfae2e
         self.action_dict = {
             0: 'move 0',  # Stop
             1: 'strafe 1',  # Move one block left
             2: 'strafe -1',  # Move one block right
-<<<<<<< HEAD
             3: 'attack 1',
-=======
->>>>>>> d6624e565e9a53a840f5951e2e48a0c34cdfae2e
         }
 
         # Rllib Parameters
@@ -57,13 +50,10 @@ class CallMePro(gym.Env):
         self.obs = None
         self.face_brick_move = False
         self.face_gold_move = False
-<<<<<<< HEAD
         self.face_diamond_move = False
         self.face_stone_move = False
         self.face_diamondblock_move = False
         self.face_coal_move = False
-=======
->>>>>>> d6624e565e9a53a840f5951e2e48a0c34cdfae2e
         self.episode_step = 0
         self.episode_return = 0
         self.returns = []
@@ -93,11 +83,7 @@ class CallMePro(gym.Env):
 
         # Get Observation
         #self.obs = self.get_observation(world_state)
-<<<<<<< HEAD
         self.obs, self.face_brick_move, self.face_gold_move, self.face_diamond_move, self.face_stone_move, self.face_diamondblock_move, self.face_coal_move = self.get_observation(world_state)
-=======
-        self.obs, self.face_brick_move, face_gold_move = self.get_observation(world_state)
->>>>>>> d6624e565e9a53a840f5951e2e48a0c34cdfae2e
 
         return self.obs
 
@@ -116,7 +102,6 @@ class CallMePro(gym.Env):
         """
 
         # Get Action
-<<<<<<< HEAD
         if(self.face_stone_move == True):
             self.agent_host.sendCommand('move 1')
             time.sleep(.2)
@@ -155,20 +140,10 @@ class CallMePro(gym.Env):
             if(action != 3):
                 command = 'move 1'
                 self.agent_host.sendCommand(command)
-=======
-        self.agent_host.sendCommand('move 1')
-        time.sleep(.2)
-        
-        #self.obs, self.allow_break_action = self.get_observation(world_state)
-        #print("true or false: ", self.select_move_action)
-        if(self.face_brick_move == True):
-            if(action != 0):
->>>>>>> d6624e565e9a53a840f5951e2e48a0c34cdfae2e
                 command = self.action_dict[action]
                 self.agent_host.sendCommand(command)
                 time.sleep(.2)
                 self.episode_step += 1
-<<<<<<< HEAD
 
         if(self.face_diamond_move == True):
             if(action != 0):
@@ -195,27 +170,13 @@ class CallMePro(gym.Env):
                     self.agent_host.sendCommand(command)
                 time.sleep(.2)
                 self.episode_step += 1
-=======
-            
-        if(self.face_gold_move == True):
-            command = 'move 1'
-            self.agent_host.sendCommand(command)
-            command = self.action_dict[action]
-            self.agent_host.sendCommand(command)
-            time.sleep(.2)
-            self.episode_step += 1
->>>>>>> d6624e565e9a53a840f5951e2e48a0c34cdfae2e
 
         # Get Observation
         world_state = self.agent_host.getWorldState()
         for error in world_state.errors:
             print("Error:", error.text)
         #self.obs = self.get_observation(world_state)
-<<<<<<< HEAD
         self.obs, self.face_brick_move, self.face_gold_move, self.face_diamond_move, self.face_stone_move, self.face_diamondblock_move, self.face_coal_move = self.get_observation(world_state)
-=======
-        self.obs, self.face_brick_move, self.face_gold_move = self.get_observation(world_state)
->>>>>>> d6624e565e9a53a840f5951e2e48a0c34cdfae2e
 
         # Get Done
         done = not world_state.is_mission_running
@@ -247,13 +208,8 @@ class CallMePro(gym.Env):
                     my_xml += '<DrawBlock y=\'' + str(y) + '\' x=\'10\' ' + 'z=\'' + str(z) + '\' type=\'lava\'/>\n'
 
             for x in range(-5,6):
-<<<<<<< HEAD
                 my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'1\' ' + 'z=\'201\' type=\'diamond_block\'/>\n'
                 for z in range(0, 51):
-=======
-                my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'1\' ' + 'z=\'101\' type=\'diamond_block\'/>\n'
-                for z in range(0, 26):
->>>>>>> d6624e565e9a53a840f5951e2e48a0c34cdfae2e
                     my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'1\' ' + 'z=\'' + str(4 * z) + '\' type=\'gold_block\'/>\n'
             return my_xml
 
@@ -263,19 +219,11 @@ class CallMePro(gym.Env):
                 if(x < -1 or x > 1):
                     for y in range(2, 3):
                         my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'' + str(y) + '\' ' + 'z=\'0\' type=\'brick_block\'/>\n'
-<<<<<<< HEAD
 
             for z in range(1, 51):
                 nblocks = random.choice(range(1, 7))
                 probdiamond = random.choice(range(1, 201))
 
-=======
-
-            for z in range(1, 26):
-                nblocks = random.choice(range(1, 7))
-                probdiamond = random.choice(range(1, 101))
-
->>>>>>> d6624e565e9a53a840f5951e2e48a0c34cdfae2e
                 for x in range(-5, -5+nblocks):
                     for y in range(2, 3):
                         my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'' + str(y) + '\' ' + 'z=\'' + str(4 * z) + '\' type=\'brick_block\'/>\n'
@@ -284,7 +232,6 @@ class CallMePro(gym.Env):
                     for y in range(2, 3):
                         my_xml += '<DrawBlock x=\'' + str(x) + '\' y=\'' + str(y) + '\' ' + 'z=\'' + str(4 * z) + '\' type=\'brick_block\'/>\n'
 
-<<<<<<< HEAD
                 if(z != 50):
                     coal_number = random.choice(range(0, 3))
                     for h in range(0, coal_number):
@@ -307,11 +254,6 @@ class CallMePro(gym.Env):
             #     j = random.choice(range(1, 101))
             #     if(j % 4 != 0):
             #         my_xml += "<DrawBlock x='{}' y='2' z='{}' type='coal_ore' />".format(randint(-5, 6), j)
-=======
-                if probdiamond > 75:
-                    diamondpos = random.choice(range(-5+nblocks, -2+nblocks))
-                    my_xml += '<DrawItem x=\'' + str(diamondpos) + '\' y=\'2\' ' + 'z=\'' + str(4 * z) + '\' type=\'diamond\'/>\n'
->>>>>>> d6624e565e9a53a840f5951e2e48a0c34cdfae2e
 
             return my_xml
 
@@ -355,10 +297,7 @@ class CallMePro(gym.Env):
                         <AgentHandlers>
                             <RewardForCollectingItem>
                             <Item reward = "10" type = "diamond" />
-<<<<<<< HEAD
                             <Item reward = "-10" type = "coal" />
-=======
->>>>>>> d6624e565e9a53a840f5951e2e48a0c34cdfae2e
                             </RewardForCollectingItem>
                             <RewardForTouchingBlockType>
                             <Block reward = "10" type = "gold_block" />
@@ -431,13 +370,10 @@ class CallMePro(gym.Env):
         obs = np.zeros((2 * self.obs_size * self.obs_size, ))
         face_brick_move = False
         face_gold_move = False
-<<<<<<< HEAD
         face_diamond_move = False
         face_stone_move = False
         face_diamondblock_move = False
         face_coal_move = False
-=======
->>>>>>> d6624e565e9a53a840f5951e2e48a0c34cdfae2e
 
         while world_state.is_mission_running:
             time.sleep(0.1)
@@ -471,7 +407,6 @@ class CallMePro(gym.Env):
                 
                 face_brick_move = observations['LineOfSight']['type'] == 'brick_block'
                 face_gold_move = observations['LineOfSight']['type'] == 'gold_block'
-<<<<<<< HEAD
                 face_diamond_move = observations['LineOfSight']['type'] == 'diamond_ore'
                 face_stone_move = observations['LineOfSight']['type'] == 'stone'
                 face_diamondblock_move = observations['LineOfSight']['type'] == 'diamond_block'
@@ -480,12 +415,6 @@ class CallMePro(gym.Env):
                 break
 
         return obs, face_brick_move, face_gold_move, face_diamond_move, face_stone_move, face_diamondblock_move, face_coal_move
-=======
-
-                break
-
-        return obs, face_brick_move, face_gold_move
->>>>>>> d6624e565e9a53a840f5951e2e48a0c34cdfae2e
 
     def log_returns(self):
         """
