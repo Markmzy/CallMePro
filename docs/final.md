@@ -45,7 +45,8 @@ returns12000.png![image](https://user-images.githubusercontent.com/57329825/1107
 
 After two hours, we can see from the figure that the agent has always maintained a high score which is 800, so we can guess and infer that the current agent has mastered the best skills and maintained his highest score range.
 
-![image](https://user-images.githubusercontent.com/57329825/110620832-758a9b80-81d4-11eb-9048-6a39541a97cd.png)
+returns30000.png![image](https://user-images.githubusercontent.com/57329825/110742724-d1efc880-8271-11eb-9800-2a4294dafe68.png)
+
 
 
 <br />
