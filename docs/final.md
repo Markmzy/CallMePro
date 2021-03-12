@@ -72,7 +72,7 @@ After one hour again and the number of steps reaches 8000 to 12000, the score st
 After two hours, we can see from the figure that the agent has always maintained a high score which is 800, so we can guess and infer that the current agent has mastered the best skills and maintained his highest score range.
 ![returns30000.png](https://user-images.githubusercontent.com/57329825/110742724-d1efc880-8271-11eb-9800-2a4294dafe68.png)
 
-<br />
+
 ## **References**
 
 #### The following resourses is useful when we doing our project.
