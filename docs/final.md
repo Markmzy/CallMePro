@@ -16,15 +16,15 @@ The goal of our project is to train an agent through a dangerous zone surrounded
 Finding a optimal route for this map is very complicated for AI. So, trivial algorithms like brute force or greedy will not be able to guarantee that the agent will complete within a limited number of steps. Therefore, reinforcement learning is the best solution. We still decided to use the PPO algorithm. Determines the future behavior of the agent by recording the observation results and the reward value. Our agent has made significant progress after learning 20,000 steps, and it has become smarter than the one in the status report. It learned to cross the gap and destroy the correct ore block and finally reached the destination line.<br />
 
 #### **Aerial view**
-![Aerial View](AerialView.png)
+![Aerial View](AerialView.png){:height="50%" width="50%"}
 
 
 #### **Overall view**
-![Overall View](Overview.png)
+![Overall View](Overview.png){:height="50%" width="50%"}
 
 
 #### **First-person view**
-![First-person View](First-person.png)
+![First-person View](First-person.png){:height="50%" width="50%"}
 
 <br />
 ## **Approaches**
@@ -64,11 +64,19 @@ TBD<br>
 ![Code](Code.png)
 <br />
 
-
-
-
-
 #### **Reinforcement learning algorithm**
+
+In this project, we are using PPO to train our agent that make him perform better. The PPO algorithm is a new type of Policy Gradient algorithm. The Policy Gradient algorithm is very sensitive to the step size, but it is difficult to choose a suitable step size. If the difference between the old and the new strategy changes during the training process is too large, it is not conducive to learning. PPO proposes a new objective function that can be updated in multiple training steps in small batches, which solves the problem of difficult to determine the step length in the Policy Gradient algorithm. The main idea of the algorithm is to accept the state s, output the action probability distribution, sample the action in the action probability distribution, execute the action, get a reward, and jump to the next state. After we get the index of action, then we will make action_dict to be a parameter of sendCommand.<br>
+
+We can collect a batch of samples after repeat these steps, and then use the gradient descent algorithm to learn these samples. A big improvement of PPO is to convert the On-policy training process in Policy Gradient into Off-policy. There are two probability density functions are written as p(x) and q(x). And p(x)/q(x) is called the ratio of the probability of taking the current action to the current state of the new and old strategy. In other words, the action is discrete, the output is a set of discrete probability distributions, the action is selected based on this probability distribution. We can fully sample the old policy, and then improve the new policy. This process can be repeated N times in a round instead of 1 time.<br>
+
+**The gradient of the average reward value for N rounds:**<br>  
+![图1](图1.png){:height="70%" width="70%"}
+
+**In the actual training process, there will be an operation on the clip:**<br>
+![图2](图2.png){:height="70%" width="70%"}
+
+#### Basic approach
 ![approach](approach.png)
 <br />
 
