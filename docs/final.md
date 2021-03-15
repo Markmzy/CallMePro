@@ -15,6 +15,18 @@ The goal of our project is to train an agent through a dangerous zone surrounded
 
 Finding a optimal route for this map is very complicated for AI. So, trivial algorithms like brute force or greedy will not be able to guarantee that the agent will complete within a limited number of steps. Therefore, reinforcement learning is the best solution. We still decided to use the PPO algorithm. Determines the future behavior of the agent by recording the observation results and the reward value. Our agent has made significant progress after learning 20,000 steps, and it has become smarter than the one in the status report. It learned to cross the gap and destroy the correct ore block and finally reached the destination line.<br />
 
+#### **Aerial view**
+![Aerial View](Aerial.png)
+
+
+#### **Overall view**
+![Overall View](Overview.png)
+
+
+#### **First Point view**
+![First Point View](First Point view.png)
+
+<br />
 ## **Approaches**
 
 #### **Map constraints**
@@ -44,10 +56,18 @@ Percentage of coal mine: 15%
 6. Reward = -10 when agent die from lava.
 ```
 
+#### **Optimal Route**
+![Optimal Route](Optimal Route.png)
+
 #### **Sample Code**
 TBD<br>
 ![Code](Code.png)
 <br />
+
+
+
+
+
 #### **Reinforcement learning algorithm**
 ![approach](approach.png)
 <br />
