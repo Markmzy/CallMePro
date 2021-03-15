@@ -88,15 +88,15 @@ For the goal of the entire project, we need to pass through each gap made up of 
 #### ***Quantitative***
 Once again clarify the agent's goal, the agent needs to get the highest possible score in the process of reaching the end. In this progress, the most important thing is reach the end line and finish the mission, so the reward he gain when he reach the finish line is the most highest. There are wall and lava in the map, and he will gain a negative reward if he touch the wall, and gain a more negative reward if he died when he touch lava. Therefore, he needs to reach the end in as few steps as possible, and try to avoid falling into the lava and death. And after he can reach the end line he should pay more attention on two obstacles: coal_ore and diamond_ore, and he would get coal and diamond if he smash them. The reward of these two itmes are different, so he should learn which he should smash to get a higher score.<br>
 
-At the first beginning 10 minuts around 1000 steps, we can see that the agent learns very fast at the beginning, so the score rises quickly. But then it may also be because of studying over, which led to some other points deducted, so the score has dropped. So he changed his strategy and his score rebounded.<br>
+At the first 10 minutes, the agent has been trained for about 1000 steps. We can see that the agent learns very fast at the beginning, so the score rises quickly. Because of overfitting, the score showed a downward trend, but he soon adjusted his strategy and the score rebounded.<br>
 
 ![returns1000.png](https://user-images.githubusercontent.com/57329825/110741857-55101f00-8270-11eb-9370-ddb2306dc4ea.png)
 
-After half hour and 4000 steps, the agent may meet a bottleneck, since the score seems to be stuck at 500, and it stays at 500 for 10 minutes. It may be that the agent has reached the end once and is trying to improve the score through other projects.<br>
+After training about 4000 steps, the agent may meet a bottleneck, since the score seems to be stuck at 500, and it stays at 500 for 10 minutes. It may be that the agent has reached the end once and is trying to improve the score by another way.<br>
 
 ![returns6000.png](https://user-images.githubusercontent.com/57329825/110742151-d071d080-8270-11eb-86ad-8058f5cce668.png)
 
-After one hour again and the number of steps reaches 8000 to 12000, the score stay at 800, and slightly decreased during this period. This may be because 800 is already the highest score that the agent can obtain through long-term learning, so when trying other methods, the score for decreasing.<br>
+After one hour, the number of steps came to 12000 and the score stay at 800, and slightly decreased during this period. This may be because 800 is already the highest score that the agent can obtain through a long-term learning, so when trying other methods, the score was decreasing.<br>
 
 ![returns12000.png](https://user-images.githubusercontent.com/57329825/110742518-7cb3b700-8271-11eb-96ac-413945fdf58f.png)
 
