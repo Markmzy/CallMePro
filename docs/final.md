@@ -59,12 +59,20 @@ Percentage of coal mine: 15%
 #### **Optimal Route**
 ![Optimal Route](OptimalRoute.png)
 
-#### **Sample Code**
+#### **Sample Code for action select**
 TBD<br>
 ![Code](Code.png)
 <br />
 
-#### **Reinforcement learning algorithm**
+#### Basic approach
+![approach](approach.png)
+<br />
+
+#### **Proximal Policy Optimization Algorithms**<br>
+
+**Pseduocode**<br>
+![Pseudocode](Pseudocode.png)
+<br />
 
 In this project, we are using PPO to train our agent that make him perform better. The PPO algorithm is a new type of Policy Gradient algorithm. The Policy Gradient algorithm is very sensitive to the step size, but it is difficult to choose a suitable step size. If the difference between the old and the new strategy changes during the training process is too large, it is not conducive to learning. PPO proposes a new objective function that can be updated in multiple training steps in small batches, which solves the problem of difficult to determine the step length in the Policy Gradient algorithm. The main idea of the algorithm is to accept the state s, output the action probability distribution, sample the action in the action probability distribution, execute the action, get a reward, and jump to the next state. After we get the index of action, then we will make action_dict to be a parameter of sendCommand.<br>
 
@@ -76,9 +84,7 @@ We can collect a batch of samples after repeat these steps, and then use the gra
 **In the actual training process, there will be an operation on the clip:**<br>
 ![图2](图2.png){:height="70%" width="70%"}
 
-#### Basic approach
-![approach](approach.png)
-<br />
+
 
 ## **Evaluation**
 
