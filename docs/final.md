@@ -5,7 +5,7 @@ title: Final Report
 
 ## **Video**
 
-<iframe width="720" height="480" src="https://www.youtube.com/embed/gO7Sl99GDOo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="720" height="480" src="https://www.youtube.com/embed/XfABipW_OyY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <br />
 
@@ -25,8 +25,8 @@ Finding a optimal route for this map is very complicated for AI. So, trivial alg
 
 #### **First-person view**
 ![First-person View](First-person.png){:height="50%" width="50%"}
-
 <br />
+
 ## **Approaches**
 
 #### **Map constraints**
