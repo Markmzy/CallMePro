@@ -60,7 +60,12 @@ Percentage of coal mine: 15%
 ![Optimal Route](OptimalRoute.png)
 
 #### **Sample Code for action select**
-TBD<br>
+
+Here are some code examples of agent actions. In our map, we have some kinds of blocks: stone, brick block, gold block, diamond block, coal ore and diamond ore.<br> 
+* All stones form the ground of the map, and the only thing the agent can do is move forward to make sure he will never go back to the start line.<br> 
+* These brick blocks are treated as walls, so the agent can not smash them, the only action he can do is move right or left to bypass the wall. Therefore, when the agent faces brick blocks, the “action” will be only 2 and 3. And since the observation area is in front of a block which is in front of the agent, so before the agent moves right or left, he should move forward first.<br> 
+* The gold blocks from the gap between the walls to support the agent to pass and gain reward. The agent also can not mash them, because they are in the ground, and if the agent mash them, he will fall to the ground and could not come up.<br> 
+* The most important thing is how the agent will do when he faces diamond ore or coal ore. The agent should decide to smash or bypass them, since he can gain different rewards if he does smash or bypass. Therefore, the agent can have 3 actions when he faces diamond ore and coal ore: move left, move right and attack.<br>
 ![Code](Code.png)
 <br />
 
